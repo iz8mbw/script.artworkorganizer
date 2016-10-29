@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.artworkorganizer.modded" name="Artwork Organizer Modded Version" version="4.0.0" provider-name="ronie">
+<addon id="script.artworkorganizer" name="Artwork Organizer" version="4.0.0" provider-name="ronie, redglory">
     <requires>
         <import addon="xbmc.python" version="2.19.0" />
         <import addon="script.module.simplejson" version="3.3.0" />
