@@ -30,14 +30,9 @@ class Main:
         self._load_settings()
         self._init_variables()
         self._delete_directories()
-        ##############################################################################
-        # redglory
-        ##############################################################################
         # get media sources if setting is defined
-        ##############################################################################
         if  self.split_media_sources == "true" and (self.split_movies_sources == "true" or self.split_tvshows_sources == "true"):
             self._get_media_sources_and_content()
-        ##############################################################################
         self._create_directories()
         if self.directoriescreated == 'true':
             self._copy_artwork()
@@ -61,11 +56,7 @@ class Main:
         else:
             self.path = ''
         self.directory = ADDON.getSetting( "directory" ).decode("utf-8")
-        ##############################################################################
-        # redglory
-        ##############################################################################
         # Option to separate artwork by media sources types (movies, tvshows) by path
-        ##############################################################################
         self.split_media_sources = ADDON.getSetting( "split_media_sources" )
         if self.split_media_sources == "true":
             self.split_movies_sources = ADDON.getSetting( "split_movies_sources" )
@@ -73,7 +64,6 @@ class Main:
         else:
             self.split_movies_sources = "false"
             self.split_tvshows_sources = "false"
-        ##############################################################################
 
     def _init_variables( self ):
         self.moviefanartdir = 'MovieFanart'
@@ -175,12 +165,8 @@ class Main:
                 except:
                     self.directoriescreated = 'false'
                     log( 'failed to create directories' )
-        ##############################################################################
-        # redglory
-        ##############################################################################
         # Create media type based directories if defined by user (movies, tvshows)
         # media source format: [(name, path, content)]
-        ##############################################################################
         if self.directoriescreated == 'true':
             if self.split_movies_sources == "true" and (self.moviefanart == "true" or self.moviethumbs == 'true'):
                 for ms_name in [m_s.name for m_s in self.movies_sources]:
@@ -208,7 +194,6 @@ class Main:
                     except:
                         self.directoriescreated = 'false'
                         log( 'failed to create directories for tvshows content type' )
-        ##############################################################################
 
     def _copy_artwork( self ):
         self.dialog.create( ADDONNAME )
@@ -270,7 +255,6 @@ class Main:
                 artwork = item['fanart']
                 tmp_filename = name + ' (' + year + ')' + '.jpg'
                 filename = clean_filename( tmp_filename )
-                # redglory
                 # test file path with movie_content to find source name
                 moviefanartpath = self.moviefanartpath
                 log("moviefanartpath: %s" % moviefanartpath)
@@ -302,7 +286,6 @@ class Main:
                 artwork = item['fanart']
                 tmp_filename = name + '.jpg'
                 filename = clean_filename( tmp_filename )
-                # redglory
                 # test file path with tv_content to find source name
                 tvshowfanartpath = self.tvshowfanartpath
                 if self.split_tvshows_sources == "true":
@@ -393,7 +376,6 @@ class Main:
                 artwork = item['thumbnail']
                 tmp_filename = name + ' (' + year + ')' + '.jpg'
                 filename = clean_filename( tmp_filename )
-                # redglory
                 # test file path with movie_content to find source name
                 moviethumbspath = self.moviethumbspath
                 if self.split_movies_sources == "true" and self.movies_content.has_key(str(item['file'])):
@@ -424,7 +406,6 @@ class Main:
                 artwork = item['art'].get('banner')
                 tmp_filename = name + '.jpg'
                 filename = clean_filename( tmp_filename )
-                # redglory
                 # test tvshow path in tv_content to find source name
                 tvshowbannerspath = self.tvshowbannerspath
                 if self.split_tvshows_sources == "true":
@@ -458,7 +439,6 @@ class Main:
                 artwork = item['art'].get('poster')
                 tmp_filename = name + '.jpg'
                 filename = clean_filename( tmp_filename )
-                # redglory
                 # test file path with tv_content to find source name
                 tvshowposterspath = self.tvshowposterspath
                 if self.split_tvshows_sources == "true":
@@ -506,7 +486,6 @@ class Main:
                         artwork = item['thumbnail']
                         tmp_filename = tvshow_title + ' - ' + name + '.jpg'
                         filename = clean_filename( tmp_filename )
-                        # redglory
                         # test file path with tv_content to find source name
                         seasonthumbspath = self.seasonthumbspath
                         if self.split_tvshows_sources == "true":
@@ -544,7 +523,6 @@ class Main:
                 episodenumber = "s%.2d%.2d" % (int( season ), int( episode ))
                 tmp_filename = tvshow + ' - ' + episodenumber + ' - ' + name + '.jpg'
                 filename = clean_filename( tmp_filename )
-                # redglory
                 # test file path with tv_content to find source name
                 episodethumbspath = self.episodethumbspath
                 if self.split_tvshows_sources == "true" and self.tvshows_content.has_key(str(item['file'])):
